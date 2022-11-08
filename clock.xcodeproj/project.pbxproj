@@ -16,6 +16,27 @@
 		8F948E4B2919EB1F0076BA91 /* clockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F948E4A2919EB1F0076BA91 /* clockTests.swift */; };
 		8F948E552919EB1F0076BA91 /* clockUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F948E542919EB1F0076BA91 /* clockUITests.swift */; };
 		8F948E572919EB1F0076BA91 /* clockUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F948E562919EB1F0076BA91 /* clockUITestsLaunchTests.swift */; };
+		8FB9F8942919EC3B00702684 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8932919EC3B00702684 /* MainViewModel.swift */; };
+		8FB9F89A2919F14D00702684 /* CompositeCancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8972919F14D00702684 /* CompositeCancellable.swift */; };
+		8FB9F89B2919F14D00702684 /* Publishers+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8982919F14D00702684 /* Publishers+Ext.swift */; };
+		8FB9F89C2919F14D00702684 /* Publisher+Schedulers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8992919F14D00702684 /* Publisher+Schedulers.swift */; };
+		8FB9F8AE2919F1D400702684 /* SynchronizedValue+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F89F2919F1D400702684 /* SynchronizedValue+Equatable.swift */; };
+		8FB9F8AF2919F1D400702684 /* SynchronizedSemaphoreValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A02919F1D400702684 /* SynchronizedSemaphoreValue.swift */; };
+		8FB9F8B02919F1D400702684 /* SynchronizedNSLockValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A12919F1D400702684 /* SynchronizedNSLockValue.swift */; };
+		8FB9F8B12919F1D400702684 /* SynchronizedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A22919F1D400702684 /* SynchronizedValue.swift */; };
+		8FB9F8B22919F1D400702684 /* SynchronizedValue+BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A32919F1D400702684 /* SynchronizedValue+BinaryFloatingPoint.swift */; };
+		8FB9F8B32919F1D400702684 /* DispatchSemaphore+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A42919F1D400702684 /* DispatchSemaphore+Ext.swift */; };
+		8FB9F8B42919F1D400702684 /* SynchronizedBarrierValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A52919F1D400702684 /* SynchronizedBarrierValue.swift */; };
+		8FB9F8B52919F1D400702684 /* Thread+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A62919F1D400702684 /* Thread+Ext.swift */; };
+		8FB9F8B62919F1D400702684 /* SynchronizedPThreadMutex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A72919F1D400702684 /* SynchronizedPThreadMutex.swift */; };
+		8FB9F8B72919F1D400702684 /* DispatchQueue+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A82919F1D400702684 /* DispatchQueue+Ext.swift */; };
+		8FB9F8B82919F1D400702684 /* SynchronizedValue+BinaryInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8A92919F1D400702684 /* SynchronizedValue+BinaryInteger.swift */; };
+		8FB9F8B92919F1D400702684 /* PropertyWrapper+ThreadLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8AA2919F1D400702684 /* PropertyWrapper+ThreadLocal.swift */; };
+		8FB9F8BA2919F1D400702684 /* SynchronizedValue+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8AB2919F1D400702684 /* SynchronizedValue+Comparable.swift */; };
+		8FB9F8BB2919F1D400702684 /* SynchronizedUnfairLockValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8AC2919F1D400702684 /* SynchronizedUnfairLockValue.swift */; };
+		8FB9F8BC2919F1D400702684 /* SynchronizedPThreadReadWriteLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8AD2919F1D400702684 /* SynchronizedPThreadReadWriteLock.swift */; };
+		8FB9F8BF2919FC6200702684 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8BE2919FC6200702684 /* SettingsView.swift */; };
+		8FB9F8C1291A19DB00702684 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8C0291A19DB00702684 /* SettingsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +70,27 @@
 		8F948E502919EB1F0076BA91 /* clockUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = clockUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F948E542919EB1F0076BA91 /* clockUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clockUITests.swift; sourceTree = "<group>"; };
 		8F948E562919EB1F0076BA91 /* clockUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = clockUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8FB9F8932919EC3B00702684 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8FB9F8972919F14D00702684 /* CompositeCancellable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeCancellable.swift; sourceTree = "<group>"; };
+		8FB9F8982919F14D00702684 /* Publishers+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publishers+Ext.swift"; sourceTree = "<group>"; };
+		8FB9F8992919F14D00702684 /* Publisher+Schedulers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Schedulers.swift"; sourceTree = "<group>"; };
+		8FB9F89F2919F1D400702684 /* SynchronizedValue+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SynchronizedValue+Equatable.swift"; sourceTree = "<group>"; };
+		8FB9F8A02919F1D400702684 /* SynchronizedSemaphoreValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedSemaphoreValue.swift; sourceTree = "<group>"; };
+		8FB9F8A12919F1D400702684 /* SynchronizedNSLockValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedNSLockValue.swift; sourceTree = "<group>"; };
+		8FB9F8A22919F1D400702684 /* SynchronizedValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedValue.swift; sourceTree = "<group>"; };
+		8FB9F8A32919F1D400702684 /* SynchronizedValue+BinaryFloatingPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SynchronizedValue+BinaryFloatingPoint.swift"; sourceTree = "<group>"; };
+		8FB9F8A42919F1D400702684 /* DispatchSemaphore+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchSemaphore+Ext.swift"; sourceTree = "<group>"; };
+		8FB9F8A52919F1D400702684 /* SynchronizedBarrierValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedBarrierValue.swift; sourceTree = "<group>"; };
+		8FB9F8A62919F1D400702684 /* Thread+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Thread+Ext.swift"; sourceTree = "<group>"; };
+		8FB9F8A72919F1D400702684 /* SynchronizedPThreadMutex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedPThreadMutex.swift; sourceTree = "<group>"; };
+		8FB9F8A82919F1D400702684 /* DispatchQueue+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Ext.swift"; sourceTree = "<group>"; };
+		8FB9F8A92919F1D400702684 /* SynchronizedValue+BinaryInteger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SynchronizedValue+BinaryInteger.swift"; sourceTree = "<group>"; };
+		8FB9F8AA2919F1D400702684 /* PropertyWrapper+ThreadLocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PropertyWrapper+ThreadLocal.swift"; sourceTree = "<group>"; };
+		8FB9F8AB2919F1D400702684 /* SynchronizedValue+Comparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SynchronizedValue+Comparable.swift"; sourceTree = "<group>"; };
+		8FB9F8AC2919F1D400702684 /* SynchronizedUnfairLockValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedUnfairLockValue.swift; sourceTree = "<group>"; };
+		8FB9F8AD2919F1D400702684 /* SynchronizedPThreadReadWriteLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedPThreadReadWriteLock.swift; sourceTree = "<group>"; };
+		8FB9F8BE2919FC6200702684 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8FB9F8C0291A19DB00702684 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +141,11 @@
 		8F948E322919EB1E0076BA91 /* clock */ = {
 			isa = PBXGroup;
 			children = (
+				8FB9F8BD2919FC5600702684 /* Settings */,
+				8FB9F8952919F14D00702684 /* Extensions */,
+				8FB9F8912919EC1D00702684 /* Main */,
 				8F948E332919EB1E0076BA91 /* AppDelegate.swift */,
 				8F948E352919EB1E0076BA91 /* SceneDelegate.swift */,
-				8F948E372919EB1E0076BA91 /* ViewController.swift */,
 				8F948E392919EB1E0076BA91 /* Main.storyboard */,
 				8F948E3C2919EB1F0076BA91 /* Assets.xcassets */,
 				8F948E3E2919EB1F0076BA91 /* LaunchScreen.storyboard */,
@@ -125,6 +169,81 @@
 				8F948E562919EB1F0076BA91 /* clockUITestsLaunchTests.swift */,
 			);
 			path = clockUITests;
+			sourceTree = "<group>";
+		};
+		8FB9F8912919EC1D00702684 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8FB9F8922919EC2600702684 /* ViewModel */,
+				8F948E372919EB1E0076BA91 /* ViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8FB9F8922919EC2600702684 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8FB9F8932919EC3B00702684 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8FB9F8952919F14D00702684 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8FB9F89D2919F1D400702684 /* Foundation */,
+				8FB9F8962919F14D00702684 /* Combine */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8FB9F8962919F14D00702684 /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				8FB9F8972919F14D00702684 /* CompositeCancellable.swift */,
+				8FB9F8982919F14D00702684 /* Publishers+Ext.swift */,
+				8FB9F8992919F14D00702684 /* Publisher+Schedulers.swift */,
+			);
+			path = Combine;
+			sourceTree = "<group>";
+		};
+		8FB9F89D2919F1D400702684 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				8FB9F89E2919F1D400702684 /* Thread */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		8FB9F89E2919F1D400702684 /* Thread */ = {
+			isa = PBXGroup;
+			children = (
+				8FB9F89F2919F1D400702684 /* SynchronizedValue+Equatable.swift */,
+				8FB9F8A02919F1D400702684 /* SynchronizedSemaphoreValue.swift */,
+				8FB9F8A12919F1D400702684 /* SynchronizedNSLockValue.swift */,
+				8FB9F8A22919F1D400702684 /* SynchronizedValue.swift */,
+				8FB9F8A32919F1D400702684 /* SynchronizedValue+BinaryFloatingPoint.swift */,
+				8FB9F8A42919F1D400702684 /* DispatchSemaphore+Ext.swift */,
+				8FB9F8A52919F1D400702684 /* SynchronizedBarrierValue.swift */,
+				8FB9F8A62919F1D400702684 /* Thread+Ext.swift */,
+				8FB9F8A72919F1D400702684 /* SynchronizedPThreadMutex.swift */,
+				8FB9F8A82919F1D400702684 /* DispatchQueue+Ext.swift */,
+				8FB9F8A92919F1D400702684 /* SynchronizedValue+BinaryInteger.swift */,
+				8FB9F8AA2919F1D400702684 /* PropertyWrapper+ThreadLocal.swift */,
+				8FB9F8AB2919F1D400702684 /* SynchronizedValue+Comparable.swift */,
+				8FB9F8AC2919F1D400702684 /* SynchronizedUnfairLockValue.swift */,
+				8FB9F8AD2919F1D400702684 /* SynchronizedPThreadReadWriteLock.swift */,
+			);
+			path = Thread;
+			sourceTree = "<group>";
+		};
+		8FB9F8BD2919FC5600702684 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8FB9F8BE2919FC6200702684 /* SettingsView.swift */,
+				8FB9F8C0291A19DB00702684 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +377,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB9F8AE2919F1D400702684 /* SynchronizedValue+Equatable.swift in Sources */,
+				8FB9F8B42919F1D400702684 /* SynchronizedBarrierValue.swift in Sources */,
 				8F948E382919EB1E0076BA91 /* ViewController.swift in Sources */,
+				8FB9F8AF2919F1D400702684 /* SynchronizedSemaphoreValue.swift in Sources */,
+				8FB9F8B62919F1D400702684 /* SynchronizedPThreadMutex.swift in Sources */,
+				8FB9F8B82919F1D400702684 /* SynchronizedValue+BinaryInteger.swift in Sources */,
+				8FB9F8B02919F1D400702684 /* SynchronizedNSLockValue.swift in Sources */,
+				8FB9F8BC2919F1D400702684 /* SynchronizedPThreadReadWriteLock.swift in Sources */,
+				8FB9F89C2919F14D00702684 /* Publisher+Schedulers.swift in Sources */,
 				8F948E342919EB1E0076BA91 /* AppDelegate.swift in Sources */,
+				8FB9F89B2919F14D00702684 /* Publishers+Ext.swift in Sources */,
+				8FB9F89A2919F14D00702684 /* CompositeCancellable.swift in Sources */,
 				8F948E362919EB1E0076BA91 /* SceneDelegate.swift in Sources */,
+				8FB9F8B72919F1D400702684 /* DispatchQueue+Ext.swift in Sources */,
+				8FB9F8B32919F1D400702684 /* DispatchSemaphore+Ext.swift in Sources */,
+				8FB9F8B22919F1D400702684 /* SynchronizedValue+BinaryFloatingPoint.swift in Sources */,
+				8FB9F8B92919F1D400702684 /* PropertyWrapper+ThreadLocal.swift in Sources */,
+				8FB9F8942919EC3B00702684 /* MainViewModel.swift in Sources */,
+				8FB9F8B52919F1D400702684 /* Thread+Ext.swift in Sources */,
+				8FB9F8B12919F1D400702684 /* SynchronizedValue.swift in Sources */,
+				8FB9F8BB2919F1D400702684 /* SynchronizedUnfairLockValue.swift in Sources */,
+				8FB9F8BA2919F1D400702684 /* SynchronizedValue+Comparable.swift in Sources */,
+				8FB9F8BF2919FC6200702684 /* SettingsView.swift in Sources */,
+				8FB9F8C1291A19DB00702684 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,8 +583,10 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,8 +613,10 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

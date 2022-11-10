@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F5E10DE291C39770000C9AD /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E10DD291C39770000C9AD /* Device.swift */; };
 		8F948E342919EB1E0076BA91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F948E332919EB1E0076BA91 /* AppDelegate.swift */; };
 		8F948E362919EB1E0076BA91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F948E352919EB1E0076BA91 /* SceneDelegate.swift */; };
 		8F948E382919EB1E0076BA91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F948E372919EB1E0076BA91 /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 		8FB9F8BC2919F1D400702684 /* SynchronizedPThreadReadWriteLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8AD2919F1D400702684 /* SynchronizedPThreadReadWriteLock.swift */; };
 		8FB9F8BF2919FC6200702684 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8BE2919FC6200702684 /* SettingsView.swift */; };
 		8FB9F8C1291A19DB00702684 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB9F8C0291A19DB00702684 /* SettingsViewModel.swift */; };
+		8FF36655291C4DDB00865BFA /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF36654291C4DDB00865BFA /* UIDevice+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F5E10DD291C39770000C9AD /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		8F948E302919EB1E0076BA91 /* clock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = clock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F948E332919EB1E0076BA91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F948E352919EB1E0076BA91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +94,7 @@
 		8FB9F8AD2919F1D400702684 /* SynchronizedPThreadReadWriteLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedPThreadReadWriteLock.swift; sourceTree = "<group>"; };
 		8FB9F8BE2919FC6200702684 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		8FB9F8C0291A19DB00702684 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8FF36654291C4DDB00865BFA /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F5E10DC291C39680000C9AD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8F5E10DD291C39770000C9AD /* Device.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		8F948E272919EB1E0076BA91 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +153,7 @@
 		8F948E322919EB1E0076BA91 /* clock */ = {
 			isa = PBXGroup;
 			children = (
+				8F5E10DC291C39680000C9AD /* Helpers */,
 				8FB9F8BD2919FC5600702684 /* Settings */,
 				8FB9F8952919F14D00702684 /* Extensions */,
 				8FB9F8912919EC1D00702684 /* Main */,
@@ -191,6 +204,7 @@
 		8FB9F8952919F14D00702684 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8FF36653291C4DCF00865BFA /* Device */,
 				8FB9F89D2919F1D400702684 /* Foundation */,
 				8FB9F8962919F14D00702684 /* Combine */,
 			);
@@ -244,6 +258,14 @@
 				8FB9F8C0291A19DB00702684 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		8FF36653291C4DCF00865BFA /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				8FF36654291C4DDB00865BFA /* UIDevice+Ext.swift */,
+			);
+			path = Device;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,6 +423,8 @@
 				8FB9F8BA2919F1D400702684 /* SynchronizedValue+Comparable.swift in Sources */,
 				8FB9F8BF2919FC6200702684 /* SettingsView.swift in Sources */,
 				8FB9F8C1291A19DB00702684 /* SettingsViewModel.swift in Sources */,
+				8F5E10DE291C39770000C9AD /* Device.swift in Sources */,
+				8FF36655291C4DDB00865BFA /* UIDevice+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

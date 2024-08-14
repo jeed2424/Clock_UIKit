@@ -67,6 +67,7 @@ class SettingsView: UIView {
         self.backgroundColor = .systemGray.withAlphaComponent(0.5)
         
         bindViewModel()
+        addTapGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -113,6 +114,17 @@ class SettingsView: UIView {
                 
                 self.showDateBtn.setImage(didEnableDate ?? false ? imageOn : imageOff, for: .normal)
             }.store(in: &subscriptions)
+    }
+    
+    private func addTapGesture() {
+        // Initialize Swipe Gesture Recognizer
+          let openSettingsGesture = UITapGestureRecognizer(target: self, action: #selector(exitSettings))
+
+          // Configure Swipe Gesture Recognizer
+        openSettingsGesture.numberOfTapsRequired = 1
+
+          // Add Swipe Gesture Recognizer
+        self.addGestureRecognizer(openSettingsGesture)
     }
     
 }

@@ -8,6 +8,13 @@
 import Foundation
 import Combine
 
+enum ClockDirection {
+    case left
+    case right
+    case down
+    case up
+}
+
 class MainViewModel: ObservableObject {
     
     let defaults = UserDefaults.standard
@@ -42,6 +49,29 @@ class MainViewModel: ObservableObject {
     
     func getDevice() {
         self.dimensions = device.getDimensions()
+    }
+    
+    func getSecondsValue(direction: ClockDirection, startOfLine: Int, currentSeconds: Int) -> Int {
+        
+        var base = 1
+        
+        switch direction {
+        case .left:
+            base += abs(currentSeconds-startOfLine)
+            
+            return base
+        case .right:
+            return 0
+        case .down:
+            base += abs(currentSeconds-startOfLine)
+            print("Base: \(base)")
+            
+            return base
+        case .up:
+            base += abs(currentSeconds-startOfLine)
+            
+            return base
+        }
     }
     
     func scheduledTimerWithTimeInterval(){

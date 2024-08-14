@@ -102,7 +102,7 @@ class ViewController: UIViewController {
         return view
     }()
     
-    private lazy var fullView: UIView = {
+    private lazy var secondsOutline: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -113,29 +113,86 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        configure()
+    }
+    
+    private func configureSecondsOutline() {
+        self.view.addSubview(secondsOutline)
+        
+        secondsOutline.backgroundColor = .systemRed
+        secondsOutline.alpha = 0.5
+    }
+    
+    private func configure() {
+        addSettingsGesture()
         setupConstraints()
-        configureCornerViews()
+        configureSecondsOutline()
         showSeconds()
     }
     
-    private func configureCornerViews() {
-        self.view.addSubview(fullView)
-        
-        fullView.backgroundColor = .systemRed
-        fullView.alpha = 0.5
-        
-        print("fullview minx: \(fullView.frame.minX), fullview midx: \(fullView.frame.midX), fullview maxx: \(fullView.frame.maxX)")
-        print("fullview miny: \(fullView.frame.minY), fullview midy: \(fullView.frame.midY), fullview maxy: \(fullView.frame.maxY)")
-    }
-    
     private func bindViewModel() {
+        
+        viewModel.$currentSecond
+            .receiveOnHigh()
+            .sink{ [weak self] currentSecond in
+                guard let self = self else { return }
+                self.currentSecond = currentSecond ?? 0
+
+                DispatchQueue.main.async {
+                guard self.view.subviews.contains(self.secondsView) else { return }
+                    if currentSecond == 0 {
+                        self.currentX = Int(self.secondsOutline.frame.midX)-35
+                        self.currentY = Int(self.secondsOutline.frame.minY)
+                        
+                        self.isGoingRight = true
+                        self.isGoingLeft = false
+                        self.isGoingDown = false
+                        self.isGoingUp = false
+                        
+                    } else if currentSecond == 15 {
+                        self.currentX = Int(self.secondsOutline.frame.maxX)-10
+                        self.currentY = Int(self.secondsOutline.frame.midY)-35
+                        print("currentX  at 30 secs: \(self.currentY)")
+                        
+                        self.isGoingRight = false
+                        self.isGoingLeft = false
+                        self.isGoingDown = true
+                        self.isGoingUp = false
+                        
+                    } else if currentSecond == 30 {
+                        self.currentX = Int(self.secondsOutline.frame.midX)+35
+                        self.currentY = Int(self.secondsOutline.frame.maxY)-10
+                        
+                        self.isGoingRight = false
+                        self.isGoingLeft = true
+                        self.isGoingDown = false
+                        self.isGoingUp = false
+                        
+                    } else if currentSecond == 45 {
+                        self.currentX = Int(self.secondsOutline.frame.minX)
+                        self.currentY = Int(self.secondsOutline.frame.midY)+35
+                        
+                        
+                        self.isGoingRight = false
+                        self.isGoingLeft = false
+                        self.isGoingDown = false
+                        self.isGoingUp = true
+                        
+                    } else {
+                        self.secondsView.backgroundColor = .systemGray
+                    }
+                }
+
+            }.store(in: &subscriptions)
+        
         viewModel.$dimensions
             .receiveOnMain()
             .sink { [weak self] dimensions in
                 guard let self = self else { return }
                 self.deviceDimensions = dimensions ?? ["": 0]
                 print("\(self.deviceDimensions)")
-                self.reloadFullView()
+                self.loadSettingsBtn()
+                self.reloadSecondsOutline()
             }.store(in: &subscriptions)
         
         viewModel.$currentTime
@@ -150,55 +207,6 @@ class ViewController: UIViewController {
             .sink{ [weak self] currentDate in
                 guard let self = self else { return }
                 self.dateLbl.text = currentDate
-            }.store(in: &subscriptions)
-        
-        viewModel.$currentSecond
-            .receiveOnMain()
-            .sink{ [weak self] currentSecond in
-                guard let self = self, self.view.subviews.contains(self.secondsView) else { return }
-                self.currentSecond = currentSecond ?? 0
-                if currentSecond == 0 {
-                    self.currentX = Int(self.fullView.frame.midX)-35
-                    self.currentY = Int(self.fullView.frame.minY)
-                    
-                    self.isGoingRight = true
-                    self.isGoingLeft = false
-                    self.isGoingDown = false
-                    self.isGoingUp = false
-                    
-                } else if currentSecond == 15 {
-                    self.currentX = Int(self.fullView.frame.maxX)-10
-                    self.currentY = Int(self.fullView.frame.midY)-35
-                    
-                    
-                    self.isGoingRight = false
-                    self.isGoingLeft = false
-                    self.isGoingDown = true
-                    self.isGoingUp = false
-                    
-                } else if currentSecond == 30 {
-                    self.currentX = Int(self.fullView.frame.midX)+35
-                    self.currentY = Int(self.fullView.frame.maxY)-10
-                    
-                    
-                    self.isGoingRight = false
-                    self.isGoingLeft = true
-                    self.isGoingDown = false
-                    self.isGoingUp = false
-                    
-                } else if currentSecond == 45 {
-                    self.currentX = Int(self.fullView.frame.minX)
-                    self.currentY = Int(self.fullView.frame.midY)+35
-                    
-                    
-                    self.isGoingRight = false
-                    self.isGoingLeft = false
-                    self.isGoingDown = false
-                    self.isGoingUp = true
-                    
-                } else {
-                    self.secondsView.backgroundColor = .systemGray
-                }
             }.store(in: &subscriptions)
         
         viewModel.$showDate
@@ -233,13 +241,6 @@ class ViewController: UIViewController {
             clockTimeLbl.bottomAnchor.constraint(equalTo: clockTimeView.bottomAnchor, constant: -75)
         ])
         
-        NSLayoutConstraint.activate([
-            settingsBtn.trailingAnchor.constraint(equalTo: clockTimeView.trailingAnchor, constant: 20),
-            settingsBtn.topAnchor.constraint(equalTo: clockTimeView.topAnchor, constant: -20),
-            settingsBtn.widthAnchor.constraint(equalToConstant: 24),
-            settingsBtn.heightAnchor.constraint(equalToConstant: 24)
-        ])
-        
     }
     
     private func setupSecondsTimer() {
@@ -254,15 +255,15 @@ class ViewController: UIViewController {
             
             toast.alpha = 0.75
             
-            if (self.currentX - Int(self.fullView.frame.minX)) <= (self.addX+15) && (self.currentY - Int(self.fullView.frame.minY)) <= (self.addY+15) {
-                //let addX = Int(self.fullView.frame.maxX-self.fullView.frame.minX)/20
+            if (self.currentX - Int(self.secondsOutline.frame.minX)) <= (self.addX+15) && (self.currentY - Int(self.secondsOutline.frame.minY)) <= (self.addY+15) {
+                //let addX = Int(self.secondsOutline.frame.maxX-self.secondsOutline.frame.minX)/20
                 toast.frame = CGRect(x: self.currentX+self.addX,
-                                     y: Int(self.fullView.frame.minY),
+                                     y: Int(self.secondsOutline.frame.minY),
                                      width: 10,
                                      height: 10)
                 
                 self.currentX += self.addX
-                self.currentY = Int(self.fullView.frame.minY)
+                self.currentY = Int(self.secondsOutline.frame.minY)
                 
                 self.isGoingUp = false
                 self.isGoingLeft = false
@@ -270,15 +271,15 @@ class ViewController: UIViewController {
                 
                 self.isGoingRight = true
                 
-            } else if (abs(self.currentX - Int(self.fullView.frame.maxX))) <= (self.addX+15) && (abs(self.currentY - Int(self.fullView.frame.minY))) <= (self.addY+15) {
-                //let addY = Int(self.fullView.frame.maxY-self.fullView.frame.minY)/10
+            } else if (abs(self.currentX - Int(self.secondsOutline.frame.maxX))) <= (self.addX+15) && (abs(self.currentY - Int(self.secondsOutline.frame.minY))) <= (self.addY+15) {
+                //let addY = Int(self.secondsOutline.frame.maxY-self.secondsOutline.frame.minY)/10
                 
-                toast.frame = CGRect(x: Int(self.fullView.frame.maxX)-10,
+                toast.frame = CGRect(x: Int(self.secondsOutline.frame.maxX)-10,
                                      y: self.currentY+self.addY,
                                      width: 10,
                                      height: 10)
                 
-                self.currentX = Int(self.fullView.frame.maxX)-10
+                self.currentX = Int(self.secondsOutline.frame.maxX)-10
                 self.currentY += self.addY
                 
                 self.isGoingUp = false
@@ -287,16 +288,16 @@ class ViewController: UIViewController {
                 
                 self.isGoingDown = true
                 
-            } else if (abs(self.currentX - Int(self.fullView.frame.maxX))) <= (self.addX+15) && (abs(self.currentY - Int(self.fullView.frame.maxY))) <= (self.addY+15) {
-               // let addX = Int(self.fullView.frame.maxX-self.fullView.frame.minX)/20
+            } else if (abs(self.currentX - Int(self.secondsOutline.frame.maxX))) <= (self.addX+15) && (abs(self.currentY - Int(self.secondsOutline.frame.maxY))) <= (self.addY+15) {
+               // let addX = Int(self.secondsOutline.frame.maxX-self.secondsOutline.frame.minX)/20
                 
                 toast.frame = CGRect(x: self.currentX-self.addX,
-                                     y: Int(self.fullView.frame.maxY)-10,
+                                     y: Int(self.secondsOutline.frame.maxY)-10,
                                      width: 10,
                                      height: 10)
                 
                 self.currentX -= self.addX
-                self.currentY = Int(self.fullView.frame.maxY)-10
+                self.currentY = Int(self.secondsOutline.frame.maxY)-10
                 
                 self.isGoingDown = false
                 self.isGoingUp = false
@@ -304,15 +305,15 @@ class ViewController: UIViewController {
                 
                 self.isGoingLeft = true
                 
-            } else if (abs(self.currentX - Int(self.fullView.frame.minX))) <= (self.addX+15) && (abs(self.currentY - Int(self.fullView.frame.maxY))) <= (self.addY+15) {
-               // let addY = Int(self.fullView.frame.maxY-self.fullView.frame.minY)/10
+            } else if (abs(self.currentX - Int(self.secondsOutline.frame.minX))) <= (self.addX+15) && (abs(self.currentY - Int(self.secondsOutline.frame.maxY))) <= (self.addY+15) {
+               // let addY = Int(self.secondsOutline.frame.maxY-self.secondsOutline.frame.minY)/10
                 
-                toast.frame = CGRect(x: Int(self.fullView.frame.minX),
+                toast.frame = CGRect(x: Int(self.secondsOutline.frame.minX),
                                      y: self.currentY-self.addY,
                                      width: 10,
                                      height: 10)
                 
-                self.currentX = Int(self.fullView.frame.minX)
+                self.currentX = Int(self.secondsOutline.frame.minX)
                 self.currentY -= self.addY
                 
                 self.isGoingDown = false
@@ -322,7 +323,7 @@ class ViewController: UIViewController {
                 self.isGoingUp = true
                 
             } else if self.isGoingUp {
-             //   let addY = Int(self.fullView.frame.maxY-self.fullView.frame.minY)/10
+             //   let addY = Int(self.secondsOutline.frame.maxY-self.secondsOutline.frame.minY)/10
                 
                 toast.frame = CGRect(x: self.currentX,
                                      y: self.currentY-self.addY,
@@ -333,7 +334,7 @@ class ViewController: UIViewController {
                 
             } else if self.isGoingDown {
                 
-               // let addY = Int(self.fullView.frame.maxY-self.fullView.frame.minY)/10
+               // let addY = Int(self.secondsOutline.frame.maxY-self.secondsOutline.frame.minY)/10
 
                 toast.frame = CGRect(x: self.currentX,
                                      y: self.currentY+self.addY,
@@ -341,11 +342,9 @@ class ViewController: UIViewController {
                                      height: 10)
                // self.currentX += 35
                 self.currentY += self.addY
-                
-                print("addY: \(self.addY)")
-                
+                                
             } else if self.isGoingLeft {
-               // let addX = Int(self.fullView.frame.maxX-self.fullView.frame.minX)/20
+               // let addX = Int(self.secondsOutline.frame.maxX-self.secondsOutline.frame.minX)/20
                 
                 toast.frame = CGRect(x: self.currentX-self.addX,
                                      y: self.currentY,
@@ -354,7 +353,7 @@ class ViewController: UIViewController {
                 self.currentX -= self.addX
                 
             } else {
-               // let addX = Int(self.fullView.frame.maxX-self.fullView.frame.minX)/20
+               // let addX = Int(self.secondsOutline.frame.maxX-self.secondsOutline.frame.minX)/20
                 
                 toast.frame = CGRect(x: self.currentX+self.addX,
                                      y: self.currentY,
@@ -372,6 +371,7 @@ class ViewController: UIViewController {
             
         }, completion: { done in
             if done {
+                print("currentSecond: \(self.currentSecond), CurrentY: \(self.currentY)")
              //   toast.alpha = 1
             }
             
@@ -381,26 +381,105 @@ class ViewController: UIViewController {
     }
     
     private func setupSeconds() {
-        
-        secondsView.layer.cornerRadius = 5
-        
-        self.view.addSubview(secondsView)
-        self.view.bringSubviewToFront(secondsView)
-        
-        secondsView.frame = CGRect(x: currentX,
-                             y: currentY,
-                             width: 10,
-                             height: 10)
-        
-        setupSecondsTimer()
-        
-        //        NSLayoutConstraint.activate([
-        //            secondsView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-        //            secondsView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50),
-        //            secondsView.widthAnchor.constraint(equalToConstant: 10),
-        //            secondsView.heightAnchor.constraint(equalToConstant: 10)
-        //        ])
-        
+        DispatchQueue.main.asyncAfter(1, action: {
+            self.secondsView.layer.cornerRadius = 5
+            
+            self.view.addSubview(self.secondsView)
+            self.view.bringSubviewToFront(self.secondsView)
+            
+            let second = 15
+            print("Seconds: \(second)")
+            
+            if (second >= 51 && second <= 59) || (second >= 0 && second <= 10) {
+
+                if second >= 0 && second <= 10 {
+                    self.currentX = Int(self.secondsOutline.frame.midX)-35+(self.addX*second)
+                    print("\(self.currentX)")
+                    
+                } else {
+                    self.currentX = ((Int(self.secondsOutline.frame.midX)-35)-(self.addX*second))
+                }
+                
+                self.isGoingRight = true
+                self.isGoingLeft = false
+                self.isGoingDown = false
+                self.isGoingUp = false
+
+            } else if second >= 11 && second <= 20 {
+                let secondValue = self.viewModel.getSecondsValue(direction: .down,
+                                                                 startOfLine: 11,
+                                                                 currentSeconds: second)
+                let value = Int(self.secondsOutline.frame.minY)-20
+                print("Value: \(value)")
+                let value2 = self.addY*secondValue
+                
+                self.currentY = (value+value2)+self.addY// (Int(self.secondsOutline.frame.minY)+35)+(self.addY*secondValue) // secondValue
+                self.currentX = Int(self.secondsOutline.frame.maxX)-10
+                
+                print("currentY at start: \(self.currentY)")
+                print("addY: \(self.addY)")
+                
+                self.secondsView.frame = CGRect(x: self.currentX,
+                                                y: self.currentY,
+                                                width: 10,
+                                                height: 10)
+                
+                self.isGoingRight = false
+                self.isGoingLeft = false
+                self.isGoingDown = true
+                self.isGoingUp = false
+                
+            } else if second >= 21 && second <= 40 {
+                let secondValue = self.viewModel.getSecondsValue(direction: .left,
+                                                                 startOfLine: 21,
+                                                                 currentSeconds: second)
+
+                // currentX = ((Int(secondsOutline.frame.midX)-35)-(addX*second))
+                
+                self.currentX = (Int(self.secondsOutline.frame.maxX)+35)-(self.addX*second)
+                //(Int(self.secondsOutline.frame.minY)+35)+(self.addX*secondValue)
+                self.currentY = Int(self.secondsOutline.frame.maxY)-10
+                
+                self.secondsView.frame = CGRect(x: self.currentX,
+                                                y: self.currentY,
+                                                width: 10,
+                                                height: 10)
+                
+                
+                self.isGoingRight = false
+                self.isGoingLeft = true
+                self.isGoingDown = false
+                self.isGoingUp = false
+
+            } else if second >= 41 && second <= 50 {
+                
+                let secondValue = self.viewModel.getSecondsValue(direction: .up,
+                                                                 startOfLine: 41,
+                                                                 currentSeconds: second)
+                let value = Int(self.secondsOutline.frame.maxY)+20
+                print("Value: \(value)")
+                let value2 = self.addY*secondValue
+                
+                self.currentY = abs(value-value2)// (Int(self.secondsOutline.frame.minY)+35)+(self.addY*secondValue) // secondValue
+                self.currentX = Int(self.secondsOutline.frame.maxX)-10
+                
+                print("currentY at start: \(self.currentY)")
+                print("addY: \(self.addY)")
+                
+                self.secondsView.frame = CGRect(x: self.currentX,
+                                                y: self.currentY,
+                                                width: 10,
+                                                height: 10)
+                
+                self.isGoingRight = false
+                self.isGoingLeft = false
+                self.isGoingDown = false
+                self.isGoingUp = true
+
+            }
+            
+            self.setupSecondsTimer()
+        })
     }
     
     private func showSeconds() {
@@ -412,23 +491,46 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
-    private func reloadFullView() {
-        guard self.view.subviews.contains(fullView) else { return }
+    private func addSettingsGesture() {
+        // Initialize Swipe Gesture Recognizer
+          let openSettingsGesture = UITapGestureRecognizer(target: self, action: #selector(openSettings))
+
+          // Configure Swipe Gesture Recognizer
+        openSettingsGesture.numberOfTapsRequired = 1
+
+          // Add Swipe Gesture Recognizer
+        self.secondsOutline.addGestureRecognizer(openSettingsGesture)
+    }
+    
+    private func loadSettingsBtn() {
+        let settingsTrailing = deviceDimensions["settingsTrailing"]
+        let settingsTop = deviceDimensions["settingsTop"]
         
-        let deviceX = deviceDimensions["deviceX"]
-        let deviceY = deviceDimensions["deviceY"]
-        let deviceWidth = deviceDimensions["deviceWidth"]
-        let deviceHeight = deviceDimensions["deviceHeight"]
+        NSLayoutConstraint.activate([
+            settingsBtn.trailingAnchor.constraint(equalTo: clockTimeView.trailingAnchor, constant: CGFloat(settingsTrailing ?? 0)),
+            settingsBtn.topAnchor.constraint(equalTo: clockTimeView.topAnchor, constant: CGFloat(settingsTop ?? 0)),
+            settingsBtn.widthAnchor.constraint(equalToConstant: 24),
+            settingsBtn.heightAnchor.constraint(equalToConstant: 24)
+        ])
         
-        self.fullView.removeFromSuperview()
-        self.view.addSubview(fullView)
-        self.fullView.frame = CGRect(x: deviceX ?? 0, y: deviceY ?? 0, width: deviceWidth ?? 0, height: deviceHeight ?? 0)
+        print("trailing: \(settingsTrailing), top: \(settingsTop)")
+    }
+    
+    private func reloadSecondsOutline() {
+        guard self.view.subviews.contains(secondsOutline) else { return }
+        
+        let secondsOutlineX = deviceDimensions["secondsOutlineX"]
+        let secondsOutlineY = deviceDimensions["secondsOutlineY"]
+        let secondsOutlineWidth = deviceDimensions["secondsOutlineWidth"]
+        let secondsOutlineHeight = deviceDimensions["secondsOutlineHeight"]
+        
+        self.secondsOutline.removeFromSuperview()
+        self.view.addSubview(secondsOutline)
+        self.secondsOutline.frame = CGRect(x: secondsOutlineX ?? 0, y: secondsOutlineY ?? 0, width: secondsOutlineWidth ?? 0, height: secondsOutlineHeight ?? 0)
         
         
-        addY = (Int(self.fullView.frame.maxY-self.fullView.frame.minY)/10)-3
-        addX = (Int(self.fullView.frame.maxX-self.fullView.frame.minX)/20)-2
-        
-        print("addX: \(addX), addY: \(addY)")
+        addY = (Int(self.secondsOutline.frame.maxY-self.secondsOutline.frame.minY)/10)-3
+        addX = (Int(self.secondsOutline.frame.maxX-self.secondsOutline.frame.minX)/20)-2
     }
     
     private func addDateToView() {
